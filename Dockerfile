@@ -6,7 +6,7 @@ COPY package*.json ./
 
 COPY ./src ./src
 
-RUN npm --version
+RUN npm install
 
 EXPOSE 80
 
