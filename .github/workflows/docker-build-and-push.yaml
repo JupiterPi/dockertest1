@@ -44,7 +44,7 @@ jobs:
     - name: Replace tokens in Kubernetes files
       uses: cschleiden/replace-tokens@v1
       with:
-        files: "[kubernetes/*.yaml]"
+        files: '["kubernetes/*.yaml"]'
       env:
         IMAGE_TAG: ${{ env.IMAGE_TAG }}
     
