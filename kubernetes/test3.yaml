@@ -14,7 +14,7 @@ spec:
     spec:
       containers: 
       - name: test3
-        image: jupiterpi/test3
+        image: jupiterpi/test3:#{IMAGE_TAG}#
         env:
         - name: PORT
           value: "80"
@@ -47,6 +47,16 @@ spec:
   - http:
       paths:
       - path: /test3
+        pathType: Prefix
+        backend:
+          service:
+            name: test3
+            port:
+              number: 80
+  - host: "test3.jupiterpi.de"
+    http:
+      paths:
+      - path: /
         pathType: Prefix
         backend:
           service:
