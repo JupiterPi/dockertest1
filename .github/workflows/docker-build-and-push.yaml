@@ -42,7 +42,7 @@ jobs:
         tags: jupiterpi/test3:${{ env.IMAGE_TAG }}
     
     - name: Replace tokens in Kubernetes files
-      uses: cschleiden/replace-tokens
+      uses: cschleiden/replace-tokens@v1
       with:
         files: "[kubernetes/*.yaml]"
       env:
