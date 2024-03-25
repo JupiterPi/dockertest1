@@ -40,6 +40,12 @@ jobs:
         platforms: linux/amd64, linux/arm64
         push: true
         tags: jupiterpi/test3:${{ env.IMAGE_TAG }}
+
+    - name: Debug 1
+      run: |
+        more kubernetes/test3.yaml
+        echo ${{ env.IMAGE_TAG }}
+        echo "Hey there"
     
     - name: Replace tokens in Kubernetes files
       uses: cschleiden/replace-tokens@v1
@@ -48,7 +54,7 @@ jobs:
       env:
         IMAGE_TAG: ${{ env.IMAGE_TAG }}
     
-    - name: Debug
+    - name: Debug 2
       run: |
         more kubernetes/test3.yaml
         echo ${{ env.IMAGE_TAG }}
