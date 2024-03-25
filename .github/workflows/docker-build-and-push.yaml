@@ -50,7 +50,7 @@ jobs:
     - name: Replace tokens in Kubernetes files
       uses: cschleiden/replace-tokens@v1
       with:
-        files: '["kubernetes/*.yaml"]'
+        files: '["kubernetes/*"]'
       env:
         IMAGE_TAG: ${{ env.IMAGE_TAG }}
     
@@ -59,3 +59,7 @@ jobs:
         more kubernetes/test3.yaml
         echo ${{ env.IMAGE_TAG }}
         echo "Hey there"
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl apply -f kubernetes
