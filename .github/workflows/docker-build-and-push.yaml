@@ -61,5 +61,9 @@ jobs:
         echo "Hey there"
 
     - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f kubernetes
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'http://kube-cd.jupiterpi.de/applyKubernetesResource/test3.yaml'
+        method: POST
+        customHeaders: '{"Authorization": "Bearer ${{ secrets.KUBE_CD_AUTH_TOKEN }}"}'
+        file: kubernetes/test3.yaml
