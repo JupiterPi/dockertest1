@@ -66,4 +66,5 @@ jobs:
         url: 'http://kube-cd.jupiterpi.de/applyKubernetesResource/test3.yaml'
         method: POST
         customHeaders: '{"Authorization": "Bearer ${{ secrets.KUBE_CD_TOKEN }}"}'
+        contentType: text/plain
         file: kubernetes/test3.yaml
