@@ -27,12 +27,6 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
-    #- name: Extract metadata (tags, labels) for Docker
-    #  id: meta
-    #  uses: docker/metadata-action@v5
-    #  with:
-    #    images: my-docker-hub-namespace/my-docker-hub-repository
-
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
@@ -40,25 +34,16 @@ jobs:
         platforms: linux/amd64, linux/arm64
         push: true
         tags: jupiterpi/test3:${{ env.IMAGE_TAG }}
-
-    - name: Debug 1
-      run: |
-        more kubernetes/test3.yaml
-        echo ${{ env.IMAGE_TAG }}
-        echo "Hey there"
     
-    - name: Replace tokens in Kubernetes files
-      uses: cschleiden/replace-tokens@v1
+    - uses: jacobtomlinson/gha-find-replace@v3
       with:
-        files: '["kubernetes/*"]'
-      env:
-        IMAGE_TAG: ${{ env.IMAGE_TAG }}
-    
-    - name: Debug 2
+        find: "jupiterpi/test3"
+        replace: "jupiterpi/test3:${{ env.IMAGE_TAG }}"
+        include: "kubernetes/**"
+
+    - name: Debug
       run: |
         more kubernetes/test3.yaml
-        echo ${{ env.IMAGE_TAG }}
-        echo "Hey there"
 
     - name: Deploy to Kubernetes
       uses: fjogeleit/http-request-action@v1
